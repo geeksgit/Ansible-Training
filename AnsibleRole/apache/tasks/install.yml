@@ -1,0 +1,11 @@
+- name: Install apache in Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  apt: name=apache2 state=latest update_cache=yes
+
+- name: Installl extra package for enterprise linux in CentOS
+  when: ansible_distribution == "CentOS"
+  yum: name=epel-release state=latest
+
+- name: Install apache in CentOS
+  when: ansible_distribution == "CentOS"
+  yum: name=httpd state=latest

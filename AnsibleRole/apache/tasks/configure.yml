@@ -1,0 +1,30 @@
+
+- name: Create the Doc root 
+  file: path=/usr/apache state=directory mode=0777
+
+- name: Configure Doc root folder in Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  copy: src=000-default.conf dest=/etc/apache2/sites-available/000-default.conf backup=yes 
+  notify:
+  - Restart apache web server in Ubuntu
+
+- name: Configure Doc root folder in Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  copy: src=apache2.conf dest=/etc/apache2/apache2.conf backup=yes
+  notify:
+  - Restart apache web server in Ubuntu
+
+- name: Configure apache port in Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  copy: src=ports.conf dest=/etc/apache2/ports.conf backup=yes
+  notify:
+  - Restart apache web server in Ubuntu
+
+- name: Configure Doc root  fodler and apache port in CentOS
+  when: ansible_distribution == "CentOS"
+  copy: src=httpd.conf dest=/etc/httpd/conf/httpd.conf backup=yes
+  notify:
+  - Restart apache web server in CentOS
+
+
+

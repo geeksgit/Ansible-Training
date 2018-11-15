@@ -1,0 +1,12 @@
+- name: Demo creating new VM on the fly
+  hosts: localhost
+  tasks: 
+  - name: Create Ubuntu VMs
+    docker_container:
+     image: "tektutor/ubuntu-ansible"
+     name: "ubuntu{{item}}"
+     ports:
+      - "708{{item}}:80"
+      - "200{{item}}:22"
+    with_sequence: start=1 end=5
+   

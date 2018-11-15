@@ -1,0 +1,4 @@
+ansible_user: vagrant 
+ansibe_become_user: root 
+ansible_become_password: welcome
+ansible_host: localhost

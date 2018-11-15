@@ -1,0 +1,19 @@
+- name: Demostrates invoking our custom ansible module
+  hosts: all
+  tasks:
+  - name: Invoke the hello ansible module
+    hello: message="Hello Ansible Module!"
+    register: output
+
+  - debug: msg="Hello module invocation failed" 
+    when: output.failed == true
+ 
+  - debug: msg="Hello module invocation succeeded"
+    when: output.failed == false 
+ 
+  - name: Adding 2 numbers
+    add: firstinput=100.1 secondinput=200.1
+    register: output
+  
+  - debug: msg="The sum of 2 numbers is {{output.meta}}"
+    when: output.failed == false

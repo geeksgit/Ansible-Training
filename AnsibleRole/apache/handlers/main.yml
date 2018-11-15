@@ -1,0 +1,10 @@
+---
+# handlers file for apache
+
+- name: Restart apache web server in Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  service: name=apache2 state=restarted
+
+- name: Restart apache web server in CentOS
+  when: ansible_distribution == "CentOS"
+  service: name=httpd state=restarted

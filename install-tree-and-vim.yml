@@ -1,0 +1,24 @@
+- name: Demostrates the use of apt module
+  hosts: ubuntu
+  become: yes
+  tasks:
+  - name: Install vim editor
+    apt: name=vim state=latest update_cache=yes
+
+  - name: Install tree utility
+    apt: name=tree state=present update_cache=yes
+
+
+- name: Demostrates the use of yum module
+  hosts: centos
+  become: yes
+  tasks:
+  - name: Install epel-release package
+    yum: name=epel-release state=latest
+
+  - name: Install vim editor
+    yum: name=vim state=latest 
+
+  - name: Install tree utility
+    yum: name=tree state=present 
+

@@ -1,0 +1,62 @@
+- name: Demostrates installing ,configuring and deploying webpage in nginx
+  hosts: all
+  become: yes
+  vars:
+  - greeting_msg: DevOps
+  vars_files:
+  - my_variables_file
+  tasks:
+  - name: Create nginx web root folder
+    file: path=/usr/nginx state=directory mode=0777
+
+  - name: Deploy our webpage into nginx webserver
+    template: src=index.html.j2 dest=/usr/nginx/index.html
+ 
+  - block:
+    - name: Install nginx web server in Ubuntu
+      apt: name=nginx state=present update-cache=yes
+
+    - name: Configure nginx web root folder in Ubuntu
+      copy: src=default dest=/etc/nginx/sites-available/default backup=yes
+      notify:
+      - Restart the nginx web service
+
+    when: ( ansible_distribution == "Ubuntu" and ansible_os_family == "Debian" )
+ 
+  - block:
+    - name: Install epel release in Centos
+      yum: name=epel-release state=latest
+ 
+    - name: Install nginx web server in Centos
+      yum: name=nginx state=latest
+
+    - name: Configure nginx web root fodler in CentOS
+#     copy: src=nginx.conf dest=/etc/nginx/nginx.conf backup=yes
+      copy:
+       src: nginx.conf
+       dest: /etc/nginx/nginx.conf
+       backup: yes
+      notify:
+      - Restart the nginx web service
+
+    when: ( ansible_distribution == "CentOS" and ansible_os_family == "RedHat" )
+ 
+  handlers:
+  - name: Restart the nginx web service
+    service: name=nginx state=restarted
+
+- name: Check if NGINX webserver is up and running
+  hosts: localhost
+  tasks:
+  - name: Access the nginx home page in Ubuntu
+    shell: curl http://localhost:8081
+    register: output
+  
+  - debug: var=output
+  
+  - name: Access the nginx home page in CentOS
+    shell: curl http://localhost:8080
+    register: output
+
+  - debug: var=output
+

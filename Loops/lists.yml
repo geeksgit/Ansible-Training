@@ -1,0 +1,11 @@
+- name: Demo the use of lists
+  hosts: all
+  become: yes
+  vars_files:
+   - software_tools_file
+  tasks:
+  - name: Install the software tools in ubuntu
+    when: ansible_distribution == "Ubuntu"
+    apt: name="{{item}}" state=latest update_cache=yes
+    with_list: "{{software_tools}}"
+

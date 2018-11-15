@@ -1,0 +1,7 @@
+- name: Demonstrates the use of sequence
+  hosts: localhost
+  tasks:
+  - name: Print the sequence 
+    debug: var=item
+    with_sequence: start=1 end=5
+   

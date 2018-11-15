@@ -1,0 +1,9 @@
+---
+- name: Demonstrates a simple playbook
+  hosts: centos,ubuntu
+  gather_facts: false
+  tasks:
+  - name: Ping the remote machine
+    ping:
+...
+

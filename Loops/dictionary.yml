@@ -1,0 +1,8 @@
+- name: Demostrate the use of dictionary variable and how to loop through a dictionary from playbook
+  hosts: localhost
+  vars_files:
+  - my_contacts
+  tasks:
+  - name: Print the contact details
+    debug: msg="{{item.key}} -- {{item.value.name}} is {{item.value.mobile}}"
+    with_dict: "{{contacts}}"

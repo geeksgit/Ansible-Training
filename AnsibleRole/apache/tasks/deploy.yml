@@ -1,0 +1,2 @@
+- name: Deploy our custom webpage into apache web server
+  template: src=index.html.j2 dest=/usr/apache/index.html

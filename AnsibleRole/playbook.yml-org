@@ -1,0 +1,6 @@
+- name: Demonstrates invoking of our custom nginx role from this playbook
+  hosts: all
+  become: yes
+  roles:
+  - nginx
+  - apache  

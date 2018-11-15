@@ -1,0 +1,12 @@
+- name: Install nginx web server in Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  apt: name=nginx state=latest update_cache=yes
+
+- name: Install Extra Packages for Enterprise Linus in CentOS
+  when: ansible_distribution == "CentOS"
+  yum: name=epel-release state=latest
+
+- name: Install nginx web server in CentOS
+  when: ansible_distribution == "CentOS"
+  yum: name=nginx state=latest
+

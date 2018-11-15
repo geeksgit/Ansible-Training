@@ -1,0 +1,10 @@
+ubuntu1 ansible_port=2222 ansible_user=vagrant ansibe_become_user=root ansible_become_password=welcome ansible_host=localhost ansible_private_key_file="/root/Training/ubuntu1/.vagrant/machines/default/virtualbox/private_key" 
+
+centos1 ansible_port=2200 ansible_user=vagrant ansible_become_user=root ansible_become_password=welcome ansible_host=localhost ansible_private_key_file="/root/Training/centos1/.vagrant/machines/default/virtualbox/private_key" 
+
+[centos]
+centos1
+
+[ubuntu]
+ubuntu1
+
